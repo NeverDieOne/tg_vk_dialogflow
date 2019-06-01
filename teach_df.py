@@ -1,37 +1,44 @@
 import json
 import requests
 import os
+from dotenv import load_dotenv
+
+# TODO add argparse
 
 
 def teach_dialogflow(file):
-    with open(file, 'r') as questions_file:
-        questions = json.load(questions_file)
+    with open(file, 'r') as _file:
+        questions = json.load(_file)
 
     url = 'https://api.dialogflow.com/v1/intents'
     headers = {
         'Authorization': f'Bearer {os.getenv("DF_TOKEN")}',
         'Content-Type': 'application/json'
     }
-    data = {
-        'lang': 'ru',
-        'v': '20150910',
-        'auto': True,
-        'contexts': [],
-        'name': 'Устройство на работу',
-        'responses': [
-            {
-                'messages': [
-                    {
-                        'speech': questions['Устройство на работу']['answer'],
-                        'type': 0
-                    }
-                ]
-            }
-        ],
-        'userSays': [{'data': [{'text': info}]} for info in questions['Устройство на работу']['questions']]
-    }
-    requests.post(url, headers=headers, json=data)
+
+    for topic, data in questions.items():
+        data = {
+            'lang': 'ru',
+            'v': '20150910',
+            'auto': True,
+            'contexts': [],
+            'name': topic,
+            'responses': [
+                {
+                    'messages': [
+                        {
+                            'speech': data['answer'],
+                            'type': 0
+                        }
+                    ]
+                }
+            ],
+            'userSays': [{'data': [{'text': info}]} for info in data['questions']]
+        }
+        requests.post(url, headers=headers, json=data)
 
 
 if __name__ == '__main__':
+    load_dotenv()
+
     teach_dialogflow('questions.json')
