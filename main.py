@@ -2,7 +2,6 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from dotenv import load_dotenv
 import requests
-from pprint import pprint
 
 
 def start(bot, update):
