@@ -15,7 +15,7 @@ def echo(event, vk_api):
         'sessionId': event.user_id
     }
     headers = {
-        'Authorization': f'Bearer {os.getenv("DF_TOKEN")}'
+        'Authorization': f'Bearer {os.environ["DF_TOKEN"]}'
     }
     response = requests.get(base_url, headers=headers, params=params)
     response.raise_for_status()
@@ -33,7 +33,7 @@ def echo(event, vk_api):
 if __name__ == '__main__':
     load_dotenv()
 
-    vk_session = vk_api.VkApi(token=os.getenv('VK_TOKEN'))
+    vk_session = vk_api.VkApi(token=os.environ['VK_TOKEN'])
     vk_api = vk_session.get_api()
     longpoll = VkLongPoll(vk_session)
     for event in longpoll.listen():
