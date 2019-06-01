@@ -16,7 +16,7 @@ Python3 должен быть уже установлен. Затем испол
 
 ## Пример использования ботов
 
-![Sample](https://i.gifer.com/3Ntj1.gif)
+![Sample](https://media.giphy.com/media/VfKyIZFXfcUFkX4jYJ/giphy.gif)
 
 ## Цель проекта
 
