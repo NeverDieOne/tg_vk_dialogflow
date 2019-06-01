@@ -18,7 +18,7 @@ def dialog_reply(bot, update):
         'sessionId': update.message.chat_id
     }
     headers = {
-        'Authorization': f'Bearer {os.getenv("DF_TOKEN_1")}'
+        'Authorization': f'Bearer {os.getenv("DF_TOKEN")}'
     }
     response = requests.get(base_url, headers=headers, params=params)
     reply = response.json()['result']['fulfillment']['speech']
@@ -35,3 +35,4 @@ if __name__ == '__main__':
     dp.add_handler(MessageHandler(Filters.text, dialog_reply))
 
     updater.start_polling()
+
