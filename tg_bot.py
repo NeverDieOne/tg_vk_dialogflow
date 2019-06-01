@@ -9,7 +9,6 @@ def start(bot, update):
 
 
 def dialog_reply(bot, update):
-    # TODO добавить проверку на ошибки запроса
     base_url = 'https://api.dialogflow.com/v1/query'
     params = {
         'v': '20150910',
@@ -21,6 +20,7 @@ def dialog_reply(bot, update):
         'Authorization': f'Bearer {os.getenv("DF_TOKEN")}'
     }
     response = requests.get(base_url, headers=headers, params=params)
+    response.raise_for_status()
     reply = response.json()['result']['fulfillment']['speech']
     update.message.reply_text(reply)
 
@@ -35,4 +35,3 @@ if __name__ == '__main__':
     dp.add_handler(MessageHandler(Filters.text, dialog_reply))
 
     updater.start_polling()
-

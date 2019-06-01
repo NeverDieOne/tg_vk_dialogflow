@@ -7,7 +7,7 @@ import argparse
 
 def teach_dialogflow(file):
     with open(file, 'r') as _file:
-        questions = json.load(_file)
+        qa = json.load(_file)
 
     url = 'https://api.dialogflow.com/v1/intents'
     headers = {
@@ -15,7 +15,7 @@ def teach_dialogflow(file):
         'Content-Type': 'application/json'
     }
 
-    for topic, data in questions.items():
+    for topic, data in qa.items():
         data = {
             'lang': 'ru',
             'v': '20150910',
@@ -34,11 +34,13 @@ def teach_dialogflow(file):
             ],
             'userSays': [{'data': [{'text': info}]} for info in data['questions']]
         }
-        requests.post(url, headers=headers, json=data)
+        response = requests.post(url, headers=headers, json=data)
+        response.raise_for_status()
 
 
 if __name__ == '__main__':
     load_dotenv()
+
     parser = argparse.ArgumentParser(description='Обучение DialogFlow')
     parser.add_argument('json', help='Файл с данными')
     args = parser.parse_args()
