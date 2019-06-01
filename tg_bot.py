@@ -17,7 +17,7 @@ def dialog_reply(bot, update):
         'sessionId': update.message.chat_id
     }
     headers = {
-        'Authorization': f'Bearer {os.getenv("DF_TOKEN")}'
+        'Authorization': f'Bearer {os.environ["DF_TOKEN"]}'
     }
     response = requests.get(base_url, headers=headers, params=params)
     response.raise_for_status()
@@ -28,7 +28,7 @@ def dialog_reply(bot, update):
 if __name__ == '__main__':
     load_dotenv()
 
-    updater = Updater(os.getenv('TG_TOKEN'))
+    updater = Updater(os.environ['TG_TOKEN'])
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler("start", start))
