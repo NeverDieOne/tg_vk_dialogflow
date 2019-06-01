@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 import random
 import requests
+import my_logging
 
 
 def echo(event, vk_api):
@@ -18,7 +19,12 @@ def echo(event, vk_api):
         'Authorization': f'Bearer {os.environ["DF_TOKEN"]}'
     }
     response = requests.get(base_url, headers=headers, params=params)
-    response.raise_for_status()
+
+    try:
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as err:
+        my_logging.logger.warning(f'VK Bot\nЧто-то пошло не так!\n{err}')
+
     reply = response.json()['result']['fulfillment']['speech']
     if reply == 'Не понимаю!':
         pass

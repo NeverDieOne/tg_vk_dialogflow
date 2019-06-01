@@ -2,6 +2,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from dotenv import load_dotenv
 import requests
+import my_logging
 
 
 def start(bot, update):
@@ -20,7 +21,12 @@ def dialog_reply(bot, update):
         'Authorization': f'Bearer {os.environ["DF_TOKEN"]}'
     }
     response = requests.get(base_url, headers=headers, params=params)
-    response.raise_for_status()
+
+    try:
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as err:
+        my_logging.logger.warning(f'TG Bot\nЧто-то пошло не так!\n{err}')
+
     reply = response.json()['result']['fulfillment']['speech']
     update.message.reply_text(reply)
 
