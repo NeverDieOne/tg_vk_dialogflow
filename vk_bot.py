@@ -20,11 +20,14 @@ def echo(event, vk_api):
     response = requests.get(base_url, headers=headers, params=params)
     response.raise_for_status()
     reply = response.json()['result']['fulfillment']['speech']
-    vk_api.messages.send(
-        user_id=event.user_id,
-        message=reply,
-        random_id=random.randint(1, 1000)
-    )
+    if reply == 'Не понимаю!':
+        pass
+    else:
+        vk_api.messages.send(
+            user_id=event.user_id,
+            message=reply,
+            random_id=random.randint(1, 1000)
+        )
 
 
 if __name__ == '__main__':
