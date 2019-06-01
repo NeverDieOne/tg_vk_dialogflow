@@ -16,7 +16,7 @@ Python3 должен быть уже установлен. Затем испол
 
 ## Пример использования ботов
 
-![](https://i.gifer.com/3Ntix.gif)
+![Sample](https://i.gifer.com/3Ntj1.gif)
 
 ## Цель проекта
 
