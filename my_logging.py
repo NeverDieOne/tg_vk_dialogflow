@@ -14,11 +14,11 @@ class MyLogsHandler(logging.Handler):
 
     def emit(self, record):
         log_entry = self.format(record)
-        self.bot.send_message(chat_id=os.getenv('CHAT_ID'),
+        self.bot.send_message(chat_id=os.environ['CHAT_ID'],
                               text=log_entry)
 
 
-bot = telegram.Bot(token=os.getenv('TG_TOKEN'))
+bot = telegram.Bot(token=os.environ['TG_TOKEN'])
 
 logger = logging.getLogger('Logger')
 logger.setLevel(logging.DEBUG)
