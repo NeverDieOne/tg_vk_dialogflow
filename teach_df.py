@@ -2,8 +2,7 @@ import json
 import requests
 import os
 from dotenv import load_dotenv
-
-# TODO add argparse
+import argparse
 
 
 def teach_dialogflow(file):
@@ -40,5 +39,8 @@ def teach_dialogflow(file):
 
 if __name__ == '__main__':
     load_dotenv()
+    parser = argparse.ArgumentParser(description='Обучение DialogFlow')
+    parser.add_argument('json', help='Файл с данными')
+    args = parser.parse_args()
 
-    teach_dialogflow('questions.json')
+    teach_dialogflow(args.json)
