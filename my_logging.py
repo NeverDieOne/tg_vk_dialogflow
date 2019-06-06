@@ -17,7 +17,7 @@ class MyLogsHandler(logging.Handler):
 
 
 bot = telegram.Bot(token=os.environ['TG_TOKEN'])
-logging.basicConfig(level=10, handlers=(MyLogsHandler(bot),))
+logging.basicConfig(level=logging.DEBUG, handlers=(MyLogsHandler(bot),))
 
 
 if __name__ == '__main__':
