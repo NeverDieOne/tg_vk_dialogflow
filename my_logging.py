@@ -3,8 +3,6 @@ from dotenv import load_dotenv
 import os
 import telegram
 
-load_dotenv()
-
 
 class MyLogsHandler(logging.Handler):
 
@@ -19,10 +17,9 @@ class MyLogsHandler(logging.Handler):
 
 
 bot = telegram.Bot(token=os.environ['TG_TOKEN'])
-logging.basicConfig(level=logging.DEBUG, handlers=(MyLogsHandler(bot),))
 logger = logging.getLogger('Logger')
-# logger.setLevel(logging.DEBUG)
-# logger.addHandler(MyLogsHandler(bot))
+logger.setLevel(logging.DEBUG)
+logger.addHandler(MyLogsHandler(bot))
 
 
 if __name__ == '__main__':
