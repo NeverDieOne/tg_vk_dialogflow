@@ -23,11 +23,7 @@ def echo(event, vk_api):
 
     reply = response.json()['result']['fulfillment']['speech']
     if reply == 'Не понимаю!':
-        vk_api.messages.send(
-            user_id=event.user_id,
-            message=response.json(),
-            random_id=random.randint(1, 1000)
-        )
+        my_logging.logger.warning(response.json())
     else:
         vk_api.messages.send(
             user_id=event.user_id,
