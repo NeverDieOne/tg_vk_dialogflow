@@ -22,10 +22,9 @@ def echo(event, vk_api):
     response.raise_for_status()
 
     reply = response.json()['result']['fulfillment']['speech']
-    if reply == 'Не понимаю!':
-        my_logging.logger.warning(response.json())
+    if reply.json()['result']['metadata']['isFallbackIntent'] == 'true':
+        pass
     else:
-        my_logging.logger.warning(response.json())
         vk_api.messages.send(
             user_id=event.user_id,
             message=reply,
