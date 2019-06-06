@@ -5,7 +5,6 @@ import requests
 import my_logging
 
 
-
 def start(bot, update):
     update.message.reply_text('Здравствуйте')
 
