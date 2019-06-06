@@ -2,7 +2,6 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from dotenv import load_dotenv
 import requests
-import logging
 import my_logging
 
 
@@ -32,7 +31,7 @@ def dialog_reply(bot, update):
 if __name__ == '__main__':
     load_dotenv()
 
-    logger = logging.getLogger('TG Logger')
+    logger = my_logging.logging.getLogger('TG Logger')
 
     updater = Updater(os.environ['TG_TOKEN'])
     dp = updater.dispatcher
