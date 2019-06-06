@@ -25,6 +25,7 @@ def echo(event, vk_api):
     if reply == 'Не понимаю!':
         my_logging.logger.warning(response.json())
     else:
+        my_logging.logger.warning(response.json())
         vk_api.messages.send(
             user_id=event.user_id,
             message=reply,
