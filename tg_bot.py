@@ -2,8 +2,9 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from dotenv import load_dotenv
 import requests
-import my_logging
 import logging
+import my_logging
+
 
 
 def start(bot, update):

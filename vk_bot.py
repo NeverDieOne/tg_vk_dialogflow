@@ -4,8 +4,8 @@ import os
 from dotenv import load_dotenv
 import random
 import requests
-import my_logging
 import logging
+import my_logging
 
 
 def echo(event, vk_api):
