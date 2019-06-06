@@ -21,11 +21,7 @@ def dialog_reply(bot, update):
         'Authorization': f'Bearer {os.environ["DF_TOKEN"]}'
     }
     response = requests.get(base_url, headers=headers, params=params)
-
-    try:
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        my_logging.logger.warning(f'TG Bot\nЧто-то пошло не так!\n{err}')
+    response.raise_for_status()
 
     reply = response.json()['result']['fulfillment']['speech']
     update.message.reply_text(reply)
@@ -40,4 +36,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(MessageHandler(Filters.text, dialog_reply))
 
-    updater.start_polling()
+    try:
+        updater.start_polling()
+    except requests.exceptions.HTTPError as err:
+        my_logging.logger.warning(f'TG Bot\nЧто-то пошло не так!\n{err}')
