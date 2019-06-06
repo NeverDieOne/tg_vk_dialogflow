@@ -22,7 +22,7 @@ def echo(event, vk_api):
     response.raise_for_status()
 
     reply = response.json()['result']['fulfillment']['speech']
-    if reply.json()['result']['metadata']['isFallbackIntent'] == 'true':
+    if response.json()['result']['metadata']['isFallbackIntent'] == 'true':
         pass
     else:
         vk_api.messages.send(
