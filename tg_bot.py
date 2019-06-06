@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 import requests
 import my_logging
+import logging
 
 
 def start(bot, update):
@@ -30,6 +31,8 @@ def dialog_reply(bot, update):
 if __name__ == '__main__':
     load_dotenv()
 
+    logger = logging.getLogger('TG Logger')
+
     updater = Updater(os.environ['TG_TOKEN'])
     dp = updater.dispatcher
 
@@ -39,4 +42,4 @@ if __name__ == '__main__':
     try:
         updater.start_polling()
     except requests.exceptions.HTTPError as err:
-        my_logging.logger.warning(f'TG Bot\nЧто-то пошло не так!\n{err}')
+        logger.warning(f'TG Bot\nЧто-то пошло не так!\n{err}')

@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import random
 import requests
 import my_logging
+import logging
 
 
 def echo(event, vk_api):
@@ -35,6 +36,8 @@ def echo(event, vk_api):
 if __name__ == '__main__':
     load_dotenv()
 
+    logger = logging.getLogger('VK Logger')
+
     vk_session = vk_api.VkApi(token=os.environ['VK_TOKEN'])
     vk_api = vk_session.get_api()
     longpoll = VkLongPoll(vk_session)
@@ -43,4 +46,4 @@ if __name__ == '__main__':
             try:
                 echo(event, vk_api)
             except requests.exceptions.HTTPError as err:
-                my_logging.logger.warning(f'VK Bot\nЧто-то пошло не так!\n{err}')
+                logger.warning(f'VK Bot\nЧто-то пошло не так!\n{err}')
