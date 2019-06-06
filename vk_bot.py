@@ -37,6 +37,7 @@ if __name__ == '__main__':
     load_dotenv()
 
     logger = logging.getLogger('VK Logger')
+    logger.warning('It starts')
 
     vk_session = vk_api.VkApi(token=os.environ['VK_TOKEN'])
     vk_api = vk_session.get_api()
