@@ -19,15 +19,15 @@ def echo(event, vk_api):
         'Authorization': f'Bearer {os.environ["DF_TOKEN"]}'
     }
     response = requests.get(base_url, headers=headers, params=params)
-
-    try:
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        my_logging.logger.warning(f'VK Bot\nЧто-то пошло не так!\n{err}')
+    response.raise_for_status()
 
     reply = response.json()['result']['fulfillment']['speech']
     if reply == 'Не понимаю!':
-        pass
+        vk_api.messages.send(
+            user_id=event.user_id,
+            message=response.json(),
+            random_id=random.randint(1, 1000)
+        )
     else:
         vk_api.messages.send(
             user_id=event.user_id,
@@ -44,4 +44,7 @@ if __name__ == '__main__':
     longpoll = VkLongPoll(vk_session)
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            echo(event, vk_api)
+            try:
+                echo(event, vk_api)
+            except requests.exceptions.HTTPError as err:
+                my_logging.logger.warning(f'VK Bot\nЧто-то пошло не так!\n{err}')
