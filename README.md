@@ -14,6 +14,8 @@ Python3 должен быть уже установлен. Затем испол
 Пример обучения:
 `python teach_df.py question.json`.
 
+[Гайд по развертыванию ботов на платформе Heroku](https://devcenter.heroku.com/articles/getting-started-with-python)
+
 ## Пример использования ботов
 
 ![Sample](https://media.giphy.com/media/VfKyIZFXfcUFkX4jYJ/giphy.gif)

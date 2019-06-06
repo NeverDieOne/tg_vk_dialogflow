@@ -41,4 +41,4 @@ if __name__ == '__main__':
     try:
         updater.start_polling()
     except requests.exceptions.HTTPError as err:
-        logger.warning(f'TG Bot\nЧто-то пошло не так!\n{err}')
+        logger.warning(f'Что-то пошло не так!\n{err}')

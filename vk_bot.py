@@ -45,4 +45,4 @@ if __name__ == '__main__':
             try:
                 echo(event, vk_api)
             except requests.exceptions.HTTPError as err:
-                logger.warning(f'VK Bot\nЧто-то пошло не так!\n{err}')
+                logger.warning(f'Что-то пошло не так!\n{err}')
