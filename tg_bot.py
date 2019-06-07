@@ -32,8 +32,10 @@ if __name__ == '__main__':
     load_dotenv()
 
     bot = telegram.Bot(token=os.environ['TG_TOKEN'])
-    my_logging.logging.basicConfig(level=10, handlers=(my_logging.MyLogsHandler(bot),))
+    my_logging.logging.basicConfig(level=my_logging.logging.WARNING, handlers=(my_logging.MyLogsHandler(bot),))
     logger = my_logging.logging.getLogger('TG Logger')
+
+    logger.warning('TG START')
 
     updater = Updater(os.environ['TG_TOKEN'])
     dp = updater.dispatcher
