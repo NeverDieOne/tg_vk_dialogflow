@@ -3,6 +3,7 @@ import requests
 import os
 from dotenv import load_dotenv
 import argparse
+import logging
 
 
 def teach_dialogflow(file):
@@ -41,8 +42,14 @@ def teach_dialogflow(file):
 if __name__ == '__main__':
     load_dotenv()
 
+    logging.basicConfig(level=logging.WARNING)
+    logger = logging.getLogger('Teach Logger')
+
     parser = argparse.ArgumentParser(description='Обучение DialogFlow')
     parser.add_argument('json', help='Файл с данными')
     args = parser.parse_args()
 
-    teach_dialogflow(args.json)
+    try:
+        teach_dialogflow(args.json)
+    except requests.exceptions.HTTPError as err:
+        logger.warning(f'Что-то пошло не так!\n{err}')

@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 import random
 import requests
+import logging
 import my_logging
 import telegram
 
@@ -37,10 +38,8 @@ if __name__ == '__main__':
     load_dotenv()
 
     bot = telegram.Bot(token=os.environ['TG_TOKEN'])
-    my_logging.logging.basicConfig(level=my_logging.logging.WARNING, handlers=(my_logging.MyLogsHandler(bot),))
-    logger = my_logging.logging.getLogger('VK Logger')
-
-    logger.warning('VK START')
+    logging.basicConfig(level=logging.WARNING, handlers=(my_logging.MyLogsHandler(bot),))
+    logger = logging.getLogger('VK Logger')
 
     vk_session = vk_api.VkApi(token=os.environ['VK_TOKEN'])
     vk_api = vk_session.get_api()
