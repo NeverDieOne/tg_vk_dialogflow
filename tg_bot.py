@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 import requests
 import my_logging
+import telegram
 
 
 def start(bot, update):
@@ -30,6 +31,8 @@ def dialog_reply(bot, update):
 if __name__ == '__main__':
     load_dotenv()
 
+    bot = telegram.Bot(token=os.environ['TG_TOKEN'])
+    my_logging.logging.basicConfig(level=10, handlers=(my_logging.MyLogsHandler(bot),))
     logger = my_logging.logging.getLogger('TG Logger')
 
     updater = Updater(os.environ['TG_TOKEN'])
